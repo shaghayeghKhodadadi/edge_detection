@@ -130,7 +130,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
         self.hideButtons()
-        
+        scanner.imageScannerViewController.cropViewController.overlayColor = .blue // Set the desired frame color
         saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
         self.dismiss(animated: true)
