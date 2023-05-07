@@ -98,8 +98,8 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         
         if #available(iOS 11.0, *) {
             selectPhotoButtonConstraints = [
-                selectPhotoButton.widthAnchor.constraint(equalToConstant: 44.0),
-                selectPhotoButton.heightAnchor.constraint(equalToConstant: 44.0),
+                selectPhotoButton.widthAnchor.constraint(equalToConstant: 0.0),
+                selectPhotoButton.heightAnchor.constraint(equalToConstant: 0.0),
                 selectPhotoButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -24.0),
                 view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: selectPhotoButton.bottomAnchor, constant: (65.0 / 2) - 10.0)
             ]
@@ -129,8 +129,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
-        self.hideButtons()
-        scanner.imageScannerViewController.cropViewController.overlayColor = .blue // Set the desired frame color
+        self.hideButtons()    
         saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
         self.dismiss(animated: true)
