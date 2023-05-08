@@ -53,15 +53,15 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         }
     }
     
-    lazy var selectPhotoButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "gallery", in: Bundle(for: SwiftEdgeDetectionPlugin.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = UIColor.white
-        button.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.isHidden = true
-        return button
-    }()
+    // lazy var selectPhotoButton: UIButton = {
+    //     let button = UIButton()
+    //     button.setImage(UIImage(named: "gallery", in: Bundle(for: SwiftEdgeDetectionPlugin.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+    //     button.tintColor = UIColor.white
+    //     button.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
+    //     button.translatesAutoresizingMaskIntoConstraints = false
+    //     button.isHidden = true
+    //     return button
+    // }()
     
     // MARK: - Actions
     
@@ -105,8 +105,8 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             ]
         } else {
             selectPhotoButtonConstraints = [
-                selectPhotoButton.widthAnchor.constraint(equalToConstant: 0.0),
-                selectPhotoButton.heightAnchor.constraint(equalToConstant: 0.0),
+                selectPhotoButton.widthAnchor.constraint(equalToConstant: 44.0),
+                selectPhotoButton.heightAnchor.constraint(equalToConstant: 44.0),
                 selectPhotoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24.0),
                 view.bottomAnchor.constraint(equalTo: selectPhotoButton.bottomAnchor, constant: (65.0 / 2) - 10.0)
             ]
@@ -119,64 +119,64 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         self.canUseGallery = canUseGallery
     }
     
-    func imageScannerController(_ scanner: ImageScannerController, didFailWithError error: Error) {
-        print(error)
-        _result!(false)
-        self.hideButtons()
-        self.dismiss(animated: true)
-    }
+    // func imageScannerController(_ scanner: ImageScannerController, didFailWithError error: Error) {
+    //     print(error)
+    //     _result!(false)
+    //     self.hideButtons()
+    //     self.dismiss(animated: true)
+    // }
     
-    func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
-        // Your ViewController is responsible for dismissing the ImageScannerController
-        scanner.dismiss(animated: true)
-        self.hideButtons()    
-        saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
-        _result!(true)
-        self.dismiss(animated: true)
-    }
+    // func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
+    //     // Your ViewController is responsible for dismissing the ImageScannerController
+    //     scanner.dismiss(animated: true)
+    //     self.hideButtons()    
+    //     saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
+    //     _result!(true)
+    //     self.dismiss(animated: true)
+    // }
     
-    func imageScannerControllerDidCancel(_ scanner: ImageScannerController) {
-        // Your ViewController is responsible for dismissing the ImageScannerController
-        scanner.dismiss(animated: true)
-        self.hideButtons()
+    // func imageScannerControllerDidCancel(_ scanner: ImageScannerController) {
+    //     // Your ViewController is responsible for dismissing the ImageScannerController
+    //     scanner.dismiss(animated: true)
+    //     self.hideButtons()
         
-        _result!(false)
-        self.dismiss(animated: true)
-    }
+    //     _result!(false)
+    //     self.dismiss(animated: true)
+    // }
     
-    func saveImage(image: UIImage) -> Bool? {
+    // func saveImage(image: UIImage) -> Bool? {
         
-        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
-            return false
-        }
+    //     guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+    //         return false
+    //     }
         
-        let path : String = "file://" + self.saveTo.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!
-        let filePath: URL = URL.init(string: path)!
+    //     let path : String = "file://" + self.saveTo.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!
+    //     let filePath: URL = URL.init(string: path)!
         
-        do {
-            let fileManager = FileManager.default
-            // Check if file exists
-            if fileManager.fileExists(atPath: filePath.path) {
-                // Delete file
-                try fileManager.removeItem(atPath: filePath.path)
-            }
-            else {
-                print("File does not exist")
-            }
-        }
-        catch let error as NSError {
-            print("An error took place: \(error)")
-        }
+    //     do {
+    //         let fileManager = FileManager.default
+    //         // Check if file exists
+    //         if fileManager.fileExists(atPath: filePath.path) {
+    //             // Delete file
+    //             try fileManager.removeItem(atPath: filePath.path)
+    //         }
+    //         else {
+    //             print("File does not exist")
+    //         }
+    //     }
+    //     catch let error as NSError {
+    //         print("An error took place: \(error)")
+    //     }
         
-        do {
-            try data.write(to: filePath)
-            return true
-        }
+    //     do {
+    //         try data.write(to: filePath)
+    //         return true
+    //     }
         
-        catch {
-            print(error.localizedDescription)
-            return false
-        }
-    }
+    //     catch {
+    //         print(error.localizedDescription)
+    //         return false
+    //     }
+    // }
 }
 
