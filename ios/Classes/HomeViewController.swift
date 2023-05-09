@@ -12,6 +12,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.isBeingPresented {
+            selectPhotoButton.isHidden=false
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
 
@@ -31,12 +32,12 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                 navigationBar.standardAppearance = appearance;
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
-            //     let appearanceTB = UITabBarAppearance()
-            //     appearanceTB.configureWithOpaqueBackground()
-            //     appearanceTB.backgroundColor = .systemBackground
-            //     UITabBar.appearance().standardAppearance = appearanceTB
-            //     UITabBar.appearance().scrollEdgeAppearance = appearanceTB
-             }
+                let appearanceTB = UITabBarAppearance()
+                appearanceTB.configureWithOpaqueBackground()
+                appearanceTB.backgroundColor = .systemBackground
+                UITabBar.appearance().standardAppearance = appearanceTB
+                UITabBar.appearance().scrollEdgeAppearance = appearanceTB
+            }
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
@@ -48,9 +49,9 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (canUseGallery == true) {
-            selectPhotoButton.isHidden = false
-        }
+        // if (canUseGallery == true) {
+        //     selectPhotoButton.isHidden = false
+        // }
     }
     
     lazy var selectPhotoButton: UIButton = {
@@ -59,7 +60,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isHidden = true
+        button.isHidden = false
         return button
     }()
     
