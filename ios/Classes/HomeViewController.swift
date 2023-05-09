@@ -31,12 +31,12 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                 navigationBar.standardAppearance = appearance;
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
-                let appearanceTB = UITabBarAppearance()
-                appearanceTB.configureWithOpaqueBackground()
-                appearanceTB.backgroundColor = .systemBackground
-                UITabBar.appearance().standardAppearance = appearanceTB
-                UITabBar.appearance().scrollEdgeAppearance = appearanceTB
-            }
+            //     let appearanceTB = UITabBarAppearance()
+            //     appearanceTB.configureWithOpaqueBackground()
+            //     appearanceTB.backgroundColor = .systemBackground
+            //     UITabBar.appearance().standardAppearance = appearanceTB
+            //     UITabBar.appearance().scrollEdgeAppearance = appearanceTB
+             }
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
@@ -98,15 +98,15 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         
         if #available(iOS 11.0, *) {
             selectPhotoButtonConstraints = [
-                selectPhotoButton.widthAnchor.constraint(equalToConstant: 0.0),
-                selectPhotoButton.heightAnchor.constraint(equalToConstant: 0.0),
+                selectPhotoButton.widthAnchor.constraint(equalToConstant: 44.0),
+                selectPhotoButton.heightAnchor.constraint(equalToConstant: 44.0),
                 selectPhotoButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -24.0),
                 view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: selectPhotoButton.bottomAnchor, constant: (65.0 / 2) - 10.0)
             ]
         } else {
             selectPhotoButtonConstraints = [
-                selectPhotoButton.widthAnchor.constraint(equalToConstant: 0.0),
-                selectPhotoButton.heightAnchor.constraint(equalToConstant: 0.0),
+                selectPhotoButton.widthAnchor.constraint(equalToConstant: 44.0),
+                selectPhotoButton.heightAnchor.constraint(equalToConstant: 44.0),
                 selectPhotoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24.0),
                 view.bottomAnchor.constraint(equalTo: selectPhotoButton.bottomAnchor, constant: (65.0 / 2) - 10.0)
             ]
@@ -130,7 +130,6 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
         self.hideButtons()
-        // scanner.imageScannerViewController.cropViewController.overlayColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.6) // Set the desired frame color
         saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
         self.dismiss(animated: true)
