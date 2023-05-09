@@ -12,7 +12,6 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.isBeingPresented {
-            selectPhotoButton.isHidden=true
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
 
@@ -45,6 +44,10 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                     self.setupConstraints()
                 }
             }
+        } else{
+
+        selectPhotoButton.isHidden=true
+
         }
     }
     
