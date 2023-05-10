@@ -12,13 +12,11 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.isBeingPresented {
-
-            if (canUseGallery == true) {
-            selectPhotoButton.isHidden = false
+            if (self.canUseGallery == true) {
+          self.selectPhotoButton.isHidden = false
              }else{
-             selectPhotoButton.isHidden = true
+            self.selectPhotoButton.isHidden = true
              }
-
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
 
@@ -50,11 +48,6 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                     window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
 
-                     if (canUseGallery == true) {
-                 selectPhotoButton.isHidden = false
-                  }else{
-                  selectPhotoButton.isHidden = true
-                  }
                 }
             }
         }
