@@ -46,6 +46,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                 if let window = UIApplication.shared.keyWindow {
                     window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
+                    self.selectPhotoButton.isHidden = false
                 }
             }
         }
@@ -58,6 +59,11 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
          if !isCameraOpen {
             // Show the selectPhotoButton only when isCameraOpen is false
             selectPhotoButton.isHidden = false
+        }else{
+
+            selectPhotoButton.isHidden = true
+
+
         }
     }
     
@@ -138,7 +144,11 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
         isCameraOpen = false
-        self.hideButtons()
+         let vc = CropViewController(image: results.croppedScan.image)
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.selectPhotoButton.isHidden = true
+        // self.hideButtons()
         saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
         self.dismiss(animated: true)
