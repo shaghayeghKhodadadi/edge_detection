@@ -12,6 +12,13 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.isBeingPresented {
+
+            if (canUseGallery == true) {
+            selectPhotoButton.isHidden = false
+             }else{
+             selectPhotoButton.isHidden = false
+             }
+
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
 
