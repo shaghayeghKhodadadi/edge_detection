@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             if (canUseGallery == true) {
             selectPhotoButton.isHidden = false
              }else{
-             selectPhotoButton.isHidden = false
+             selectPhotoButton.isHidden = true
              }
 
             cameraController = ImageScannerController()
@@ -49,6 +49,12 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                 if let window = UIApplication.shared.keyWindow {
                     window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
+
+                     if (canUseGallery == true) {
+                 selectPhotoButton.isHidden = false
+                  }else{
+                  selectPhotoButton.isHidden = true
+                  }
                 }
             }
         }
