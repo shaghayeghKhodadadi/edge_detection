@@ -40,21 +40,17 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
-                    window.addSubview(self.selectPhotoButton)
+                    // window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
                 }
             }
-        } else{
-
-        selectPhotoButton.isHidden=true
-
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // if (canUseGallery == true) {
-        //     selectPhotoButton.isHidden = false
-        // }
+        if (canUseGallery == true) {
+            selectPhotoButton.isHidden = false
+        }
     }
     
     lazy var selectPhotoButton: UIButton = {
@@ -63,7 +59,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isHidden = false
+        button.isHidden = true
         return button
     }()
     
