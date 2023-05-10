@@ -40,7 +40,8 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
-                    // window.addSubview(self.selectPhotoButton)
+                    selectPhotoButton.hideButtons = true
+                    window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
                 }
             }
