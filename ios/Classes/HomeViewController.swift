@@ -55,7 +55,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         // if (canUseGallery == true) {
         //     selectPhotoButton.isHidden = false
         // }
-         if !isCameraOpen && canUseGallery {
+         if !isCameraOpen {
             // Show the selectPhotoButton only when isCameraOpen is false
             selectPhotoButton.isHidden = false
         }
