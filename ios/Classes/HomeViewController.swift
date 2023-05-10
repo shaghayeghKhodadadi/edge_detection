@@ -9,11 +9,15 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     var saveTo: String = ""
     var canUseGallery: Bool = true
+    var isCameraOpen: Bool = false
+
     
     override func viewDidAppear(_ animated: Bool) {
         if self.isBeingPresented {
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
+            isCameraOpen = true
+
 
             if #available(iOS 13.0, *) {
                 cameraController.isModalInPresentation = true
@@ -40,7 +44,6 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
-                    selectPhotoButton.hideButtons = true
                     window.addSubview(self.selectPhotoButton)
                     self.setupConstraints()
                 }
@@ -49,7 +52,11 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (canUseGallery == true) {
+        // if (canUseGallery == true) {
+        //     selectPhotoButton.isHidden = false
+        // }
+         if !isCameraOpen && canUseGallery {
+            // Show the selectPhotoButton only when isCameraOpen is false
             selectPhotoButton.isHidden = false
         }
     }
@@ -68,7 +75,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     
     @objc private func cancelImageScannerController() {
         hideButtons()
-        
+         isCameraOpen = false
         _result!(false)
         cameraController?.dismiss(animated: true)
         dismiss(animated: true)
@@ -78,7 +85,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         if let window = UIApplication.shared.keyWindow {
             window.rootViewController?.dismiss(animated: true, completion: nil)
             self.hideButtons()
-            
+            isCameraOpen = false
             let scanPhotoVC = ScanPhotoViewController()
             scanPhotoVC._result = _result
             scanPhotoVC.saveTo = self.saveTo
@@ -130,6 +137,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
     func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
+        isCameraOpen = false
         self.hideButtons()
         saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
