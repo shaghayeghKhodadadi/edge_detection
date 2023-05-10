@@ -74,12 +74,13 @@ class ScanPhotoViewController: UIViewController, ImageScannerControllerDelegate,
         // Your ViewController is responsible for dismissing the ImageScannerController
         scanner.dismiss(animated: true)
         
-        
+    let enhancedScanImage = results.enhancedScan!.image
         // saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
-        saveImage(image:results.enhancedScan!.image)
+        saveImage(image:enhancedScanImage)
         _result!(true)
         self.dismiss(animated: true)
     }
+    
     
     func imageScannerControllerDidCancel(_ scanner: ImageScannerController) {
         // Your ViewController is responsible for dismissing the ImageScannerController
