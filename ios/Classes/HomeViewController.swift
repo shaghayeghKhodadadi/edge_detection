@@ -31,16 +31,16 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
                 let appearance = UINavigationBarAppearance()
                 let navigationBar = UINavigationBar()
                 appearance.configureWithOpaqueBackground()
-                appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
-                appearance.backgroundColor = .systemBackground
-                navigationBar.standardAppearance = appearance;
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                // appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+                // appearance.backgroundColor = .systemBackground
+                // navigationBar.standardAppearance = appearance;
+                // UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
-                let appearanceTB = UITabBarAppearance()
-                appearanceTB.configureWithOpaqueBackground()
-                appearanceTB.backgroundColor = .systemBackground
-                UITabBar.appearance().standardAppearance = appearanceTB
-                UITabBar.appearance().scrollEdgeAppearance = appearanceTB
+                // let appearanceTB = UITabBarAppearance()
+                // appearanceTB.configureWithOpaqueBackground()
+                // appearanceTB.backgroundColor = .systemBackground
+                // UITabBar.appearance().standardAppearance = appearanceTB
+                // UITabBar.appearance().scrollEdgeAppearance = appearanceTB
             }
             
             present(cameraController, animated: true) {
