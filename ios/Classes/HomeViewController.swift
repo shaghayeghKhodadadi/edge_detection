@@ -20,28 +20,28 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             cameraController = ImageScannerController()
             cameraController.imageScannerDelegate = self
 
-            // if #available(iOS 13.0, *) {
-            //     cameraController.isModalInPresentation = true
-            //     cameraController.overrideUserInterfaceStyle = .dark
-            //     cameraController.view.backgroundColor = .black
-            // }
+            if #available(iOS 13.0, *) {
+                cameraController.isModalInPresentation = true
+                cameraController.overrideUserInterfaceStyle = .dark
+                cameraController.view.backgroundColor = .black
+            }
             
-            // // Temp fix for https://github.com/WeTransfer/WeScan/issues/320
-            // if #available(iOS 15, *) {
-            //     let appearance = UINavigationBarAppearance()
-            //     let navigationBar = UINavigationBar()
-            //     appearance.configureWithOpaqueBackground()
-            //     appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
-            //     appearance.backgroundColor = .systemBackground
-            //     navigationBar.standardAppearance = appearance;
-            //     UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            // Temp fix for https://github.com/WeTransfer/WeScan/issues/320
+            if #available(iOS 15, *) {
+                let appearance = UINavigationBarAppearance()
+                let navigationBar = UINavigationBar()
+                appearance.configureWithOpaqueBackground()
+                appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+                appearance.backgroundColor = .systemBackground
+                navigationBar.standardAppearance = appearance;
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
-            //     let appearanceTB = UITabBarAppearance()
-            //     appearanceTB.configureWithOpaqueBackground()
-            //     appearanceTB.backgroundColor = .systemBackground
-            //     UITabBar.appearance().standardAppearance = appearanceTB
-            //     UITabBar.appearance().scrollEdgeAppearance = appearanceTB
-            // }
+                let appearanceTB = UITabBarAppearance()
+                appearanceTB.configureWithOpaqueBackground()
+                appearanceTB.backgroundColor = .systemBackground
+                UITabBar.appearance().standardAppearance = appearanceTB
+                UITabBar.appearance().scrollEdgeAppearance = appearanceTB
+            }
             
             present(cameraController, animated: true) {
                 if let window = UIApplication.shared.keyWindow {
@@ -137,9 +137,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
         scanner.dismiss(animated: true)
         self.hideButtons()
         let enhancedScanImage = results.enhancedScan!.image
-
         saveImage(image:enhancedScanImage)
-
         // saveImage(image:results.doesUserPreferEnhancedScan ? results.enhancedScan!.image : results.croppedScan.image)
         _result!(true)
         self.dismiss(animated: true)

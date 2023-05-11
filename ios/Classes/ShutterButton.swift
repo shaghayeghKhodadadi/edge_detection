@@ -50,13 +50,13 @@ final class ShutterButton: UIControl {
         
         outterRingLayer.frame = rect
         outterRingLayer.path = pathForOutterRing(inRect: rect).cgPath
-        outterRingLayer.fillColor = UIColor.blue.cgColor
+        outterRingLayer.fillColor = UIColor.white.cgColor
         outterRingLayer.rasterizationScale = UIScreen.main.scale
         outterRingLayer.shouldRasterize = true
         
         innerCircleLayer.frame = rect
         innerCircleLayer.path = pathForInnerCircle(inRect: rect).cgPath
-        innerCircleLayer.fillColor = UIColor.blue.cgColor
+        innerCircleLayer.fillColor = UIColor.white.cgColor
         innerCircleLayer.rasterizationScale = UIScreen.main.scale
         innerCircleLayer.shouldRasterize = true
     }
