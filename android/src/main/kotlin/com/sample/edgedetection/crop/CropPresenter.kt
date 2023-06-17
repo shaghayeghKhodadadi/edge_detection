@@ -158,7 +158,6 @@ class CropPresenter(
             rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
             outStream.flush()
             outStream.close()
-            rotatePic.recycle()
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
@@ -169,7 +168,6 @@ class CropPresenter(
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
-                pic.recycle()
                 Log.i(TAG, "EnhancedPicture Saved")
             } else {
                 val cropPic = croppedBitmap
@@ -178,7 +176,6 @@ class CropPresenter(
                     cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                     outStream.flush()
                     outStream.close()
-                    cropPic.recycle()
                     Log.i(TAG, "CroppedBitmap Saved")
                 }
             }
