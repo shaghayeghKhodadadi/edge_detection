@@ -158,6 +158,10 @@ class CropPresenter(
             rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
             outStream.flush()
             outStream.close()
+            if (!rotatePic.isRecycled()) {
+                rotatePic.recycle();
+                rotatePic = null; 
+            }
             rotatePic.recycle()
             Log.i(TAG, "RotateBitmap Saved")
         } else {
@@ -169,16 +173,23 @@ class CropPresenter(
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
-                pic.recycle()
+                if (!pic.isRecycled()) {
+                    pic.recycle();
+                    pic = null; 
+                }
                 Log.i(TAG, "EnhancedPicture Saved")
             } else {
                 val cropPic = croppedBitmap
                 if (null != cropPic) {
+                
                     val outStream = FileOutputStream(file)
                     cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                     outStream.flush()
                     outStream.close()
-                    cropPic.recycle()
+                    if (!cropPic.isRecycled()) {
+                       cropPic.recycle();
+                       cropPic = null; 
+                    }
                     Log.i(TAG, "CroppedBitmap Saved")
                 }
             }
