@@ -21,7 +21,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-const val IMAGES_DIR = "smart_scanner"
+val IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
     private val context: Context,
