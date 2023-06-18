@@ -20,7 +20,8 @@ import org.opencv.core.Mat
 import java.io.File
 import java.io.FileOutputStream
 
-var IMAGES_DIR = "smart_scanner"
+
+const val IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
     private val context: Context,
