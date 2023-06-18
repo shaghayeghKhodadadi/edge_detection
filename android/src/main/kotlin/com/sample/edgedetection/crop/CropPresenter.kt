@@ -139,7 +139,7 @@ class CropPresenter(
 
         Log.i(TAG, "ROTATEBITMAPDEGREE --> $rotateBitmapDegree")
 
-        rotateBitmap = rotateBitmap?.rotateInt(rotateBitmapDegree)
+        rotateBitmap = rotateBitmap?.rotateInt(rotateBitmapDegree) ?: return
 
         //rotateBitmap = rotateBitmap?.rotateFloat(rotateBitmapDegree.toFloat())
 
@@ -152,7 +152,7 @@ class CropPresenter(
     fun save() {
         val file = File(initialBundle.getString(EdgeDetectionHandler.SAVE_TO) as String);
 
-        val rotatePic = rotateBitmap
+        var rotatePic = rotateBitmap
         if (null != rotatePic) {
             val outStream = FileOutputStream(file)
             rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
@@ -166,8 +166,7 @@ class CropPresenter(
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
-            val pic = enhancedPicture
-
+            val pic = enhancedPicture ?: return
             if (null != pic) {
                 val outStream = FileOutputStream(file)
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
