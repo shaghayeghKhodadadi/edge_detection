@@ -21,7 +21,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-const val IMAGES_DIR = "smart_scanner"
+const var IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
     private val context: Context,
@@ -154,39 +154,37 @@ class CropPresenter(
 
         var rotatePic = rotateBitmap
         if (null != rotatePic) {
-            val outStream = FileOutputStream(file)
+            var outStream = FileOutputStream(file)
             rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
             outStream.flush()
             outStream.close()
             if (!rotatePic.isRecycled()) {
-                rotatePic.recycle();
+                rotatePic?.recycle();
                 rotatePic = null; 
             }
-            rotatePic.recycle()
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
             val pic = enhancedPicture ?: return
             if (null != pic) {
-                val outStream = FileOutputStream(file)
+                var outStream = FileOutputStream(file)
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
                 if (!pic.isRecycled()) {
-                    pic.recycle();
+                    pic?.recycle();
                     pic = null; 
                 }
                 Log.i(TAG, "EnhancedPicture Saved")
             } else {
                 val cropPic = croppedBitmap
                 if (null != cropPic) {
-                
                     val outStream = FileOutputStream(file)
                     cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                     outStream.flush()
                     outStream.close()
                     if (!cropPic.isRecycled()) {
-                       cropPic.recycle();
+                       cropPic?.recycle();
                        cropPic = null; 
                     }
                     Log.i(TAG, "CroppedBitmap Saved")
