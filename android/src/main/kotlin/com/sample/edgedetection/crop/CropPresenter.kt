@@ -21,7 +21,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-val IMAGES_DIR = "smart_scanner"
+const val IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
     private val context: Context,
@@ -139,7 +139,7 @@ class CropPresenter(
 
         Log.i(TAG, "ROTATEBITMAPDEGREE --> $rotateBitmapDegree")
 
-        rotateBitmap = rotateBitmap?.rotateInt(rotateBitmapDegree) ?: return
+        rotateBitmap = rotateBitmap?.rotateInt(rotateBitmapDegree)
 
         //rotateBitmap = rotateBitmap?.rotateFloat(rotateBitmapDegree.toFloat())
 
@@ -152,40 +152,43 @@ class CropPresenter(
     fun save() {
         val file = File(initialBundle.getString(EdgeDetectionHandler.SAVE_TO) as String);
 
-        var rotatePic = rotateBitmap
+        val rotatePic = rotateBitmap
         if (null != rotatePic) {
-            var outStream = FileOutputStream(file)
+            val outStream = FileOutputStream(file)
             rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
             outStream.flush()
             outStream.close()
             if (!rotatePic.isRecycled()) {
-                rotatePic?.recycle();
-                rotatePic = null; 
+                rotatePic.recycle();
+               
             }
+           
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
-            val pic = enhancedPicture ?: return
+            val pic = enhancedPicture
+
             if (null != pic) {
                 val outStream = FileOutputStream(file)
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
                 if (!pic.isRecycled()) {
-                    pic?.recycle();
-                    pic = null; 
+                    pic.recycle();
+                    
                 }
                 Log.i(TAG, "EnhancedPicture Saved")
             } else {
                 val cropPic = croppedBitmap
                 if (null != cropPic) {
+                
                     val outStream = FileOutputStream(file)
                     cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                     outStream.flush()
                     outStream.close()
                     if (!cropPic.isRecycled()) {
-                       cropPic?.recycle();
-                       cropPic = null; 
+                       cropPic.recycle();
+                        
                     }
                     Log.i(TAG, "CroppedBitmap Saved")
                 }
