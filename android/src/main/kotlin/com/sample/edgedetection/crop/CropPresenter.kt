@@ -20,8 +20,7 @@ import org.opencv.core.Mat
 import java.io.File
 import java.io.FileOutputStream
 
-
-const var IMAGES_DIR = "smart_scanner"
+var IMAGES_DIR = "smart_scanner"
 
 class CropPresenter(
     private val context: Context,
@@ -167,7 +166,7 @@ class CropPresenter(
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
             val pic = enhancedPicture ?: return
             if (null != pic) {
-                var outStream = FileOutputStream(file)
+                val outStream = FileOutputStream(file)
                 pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
