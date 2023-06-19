@@ -166,8 +166,7 @@ class CropPresenter(
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
-            val pic = enhancedPicture ?: croppedBitmap
-
+            val pic = enhancedPicture
 
             if (null != pic) {
                 val outStream = FileOutputStream(file)
