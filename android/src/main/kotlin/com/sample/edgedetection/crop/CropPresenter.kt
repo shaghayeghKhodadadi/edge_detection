@@ -179,7 +179,21 @@ class CropPresenter(
                     
                 }
                 Log.i(TAG, "EnhancedPicture Saved")
-            } 
+            } else {
+                val cropPic = croppedBitmap
+                if (null != cropPic) {
+                
+                    val outStream = FileOutputStream(file)
+                    cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+                    outStream.flush()
+                    outStream.close()
+                    if (!cropPic.isRecycled()) {
+                       cropPic.recycle();
+                        
+                    }
+                    Log.i(TAG, "CroppedBitmap Saved")
+                }
+            }
         }
     }
 
