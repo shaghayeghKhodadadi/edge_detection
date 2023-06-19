@@ -166,7 +166,8 @@ class CropPresenter(
             Log.i(TAG, "RotateBitmap Saved")
         } else {
             //first save enhanced picture, if picture is not enhanced, save cropped picture, otherwise nothing to do
-            val pic = enhancedPicture
+            val pic = enhancePicture(croppedBitmap)
+
 
             if (null != pic) {
                 val outStream = FileOutputStream(file)
@@ -178,21 +179,7 @@ class CropPresenter(
                     
                 }
                 Log.i(TAG, "EnhancedPicture Saved")
-            } else {
-                val cropPic = croppedBitmap
-                if (null != cropPic) {
-                
-                    val outStream = FileOutputStream(file)
-                    cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
-                    outStream.flush()
-                    outStream.close()
-                    if (!cropPic.isRecycled()) {
-                       cropPic.recycle();
-                        
-                    }
-                    Log.i(TAG, "CroppedBitmap Saved")
-                }
-            }
+            } 
         }
     }
 

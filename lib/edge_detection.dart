@@ -8,7 +8,7 @@ class EdgeDetection {
   /// Call this method to scan the object edge in live camera.
   static Future<bool> detectEdge(String saveTo,
       {
-        bool canUseGallery = false,
+        bool canUseGallery = true,
         String androidScanTitle = "Scanning",
         String androidCropTitle = "Crop",
         androidCropBlackWhiteTitle = "Black White",

@@ -17,7 +17,7 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
         {
             let args = call.arguments as! Dictionary<String, Any>
             let saveTo = args["save_to"] as! String
-            let canUseGallery = args["can_use_gallery"] as! Bool
+            let canUseGallery = false
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
