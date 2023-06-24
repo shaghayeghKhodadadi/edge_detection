@@ -142,8 +142,6 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
                 val uri: Uri = data!!.data!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     onImageSelected(uri)
-                }else{
-                    onImageSelected(uri)
                 }
             } else {
                 if (intent.hasExtra(EdgeDetectionHandler.FROM_GALLERY) && intent.getBooleanExtra(
