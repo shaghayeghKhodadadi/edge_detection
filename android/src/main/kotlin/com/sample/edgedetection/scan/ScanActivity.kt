@@ -139,9 +139,12 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK && data!=null) {
-                val uri: Uri = data.data
-                
+                val uri: Uri? = data.data
+                if (uri != null) {
                     onImageSelected(uri)
+    } else {
+        // Handle the case where the URI is null
+    }
                 
             } else {
                 if (intent.hasExtra(EdgeDetectionHandler.FROM_GALLERY) && intent.getBooleanExtra(
