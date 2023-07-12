@@ -81,20 +81,8 @@ class CropPresenter(
             return
         }
 
-        val imgToEnhance: Bitmap? = when {
-            enhancedPicture != null -> {
-                enhancedPicture
-            }
-            rotateBitmap != null -> {
-                rotateBitmap
-            }
-            else -> {
-                croppedBitmap
-            }
-        }
-
         Observable.create<Bitmap> {
-            it.onNext(enhancePicture(imgToEnhance))
+            it.onNext(enhancePicture(croppedBitmap))
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -151,7 +139,6 @@ class CropPresenter(
 
     fun save() {
         val file = File(initialBundle.getString(EdgeDetectionHandler.SAVE_TO) as String);
-
         val rotatePic = rotateBitmap
         if (null != rotatePic) {
             val outStream = FileOutputStream(file)
